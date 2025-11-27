@@ -176,7 +176,7 @@ main.container {
   margin-bottom: 2rem;
   color: var(--popup-muted);
   font-size: 1.2rem;
-  max-width: 600px;
+  max-width: 75000px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -186,6 +186,9 @@ main.container {
   font-style: italic;
   margin-bottom: 1rem !important;
   font-weight: 500;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .upload-area {
@@ -513,6 +516,15 @@ footer {
   border-top: 1px solid var(--glass-border);
   position: relative;
   margin-top: auto;
+}
+
+footer a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
 }
 
 footer::before {
