@@ -671,10 +671,7 @@ function displayPeopleResults(matches, start, count, resultsEl) {
     const nameHtml = dn ? `<strong>${escapeHTML(dn)}</strong> ` : '';
     const profileUrl = p.profileUrl || profileUrlFor(currentPlatform, uname);
     div.innerHTML = `${nameHtml}<span style="opacity:.8">(@${escapeHTML(uname)})</span> — <a href="#" class="open-bg">${escapeHTML(profileUrl)}</a>`;
-    div.querySelector('.open-bg').addEventListener('click', (e) => {
-      e.preventDefault();
-      window.open(profileUrl, '_blank');
-    });
+    div.querySelector('.open-bg').addEventListener('click', () => window.open(profileUrl, '_blank'));
     resultsEl.appendChild(div);
   });
 }
@@ -1226,12 +1223,3 @@ function scrollToTop() {
 
 backToTopBtn.addEventListener('click', scrollToTop);
 window.addEventListener('scroll', toggleBackToTopBtn);
-
-// Global link handler to ensure all links open in new tabs
-document.addEventListener('click', function(e) {
-  const link = e.target.closest('a');
-  if (link && link.href.startsWith('http')) {
-    e.preventDefault();
-    window.open(link.href, '_blank');
-  }
-});
