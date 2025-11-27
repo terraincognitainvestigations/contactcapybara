@@ -383,7 +383,7 @@ function toggleCommentUserVideos(rowEl, data, uname) {
   const vids = document.createElement('div');
   vids.className = 'videos';
   const profileUrl = data.profileUrl || profileUrlFor(currentPlatform, uname);
-  const header = `<div style="opacity:.9;margin-bottom:4px">Profile: <a href="#" class="open-bg">${escapeHTML(uname)}</a></div>`;
+  const header = `<div style="opacity:.9;margin-bottom:4px">Profile: <a href="${profileUrl}" class="open-bg" target="_blank">${escapeHTML(uname)}</a></div>`;
   const videosHeader = `<div style="opacity:.9;margin-top:6px;margin-bottom:4px">Commented on ${data.videos.length} post(s):</div>`;
   const commentsByPost = {};
   allData.forEach(video => {
@@ -399,7 +399,7 @@ function toggleCommentUserVideos(rowEl, data, uname) {
     if (index > 0) html += '<br>';
     const postNum = index + 1;
     const postText = `Post ${postNum}`;
-    const postLink = `<div>${postText}: <a href="#" class="open-bg">${escapeHTML(url)}</a></div>`;
+    const postLink = `<div>${postText}: <a href="${url}" class="open-bg" target="_blank">${escapeHTML(url)}</a></div>`;
     const commentList = comments.map(comment => `<div>- ${escapeHTML(comment)}</div>`).join('');
     return html + postLink + commentList;
   }).join('');
@@ -512,8 +512,8 @@ function toggleCommentResultVideos(rowEl, m) {
   vids.className = 'videos';
   const unameClean = cleanHandle(m.username);
   const profileUrl = m.profileUrl || profileUrlFor(currentPlatform, unameClean);
-  const postLink = `<div style="opacity:.9;margin-bottom:4px">Post: <a href="#" class="open-bg">${escapeHTML(m.videoUrl)}</a></div>`;
-  const profileLink = `<div style="opacity:.9;margin-top:6px;margin-bottom:4px">Profile: <a href="#" class="open-bg">${escapeHTML(profileUrl)}</a></div>`;
+  const postLink = `<div style="opacity:.9;margin-bottom:4px">Post: <a href="${m.videoUrl}" class="open-bg" target="_blank">${escapeHTML(m.videoUrl)}</a></div>`;
+  const profileLink = `<div style="opacity:.9;margin-top:6px;margin-bottom:4px">Profile: <a href="${profileUrl}" class="open-bg" target="_blank">${escapeHTML(profileUrl)}</a></div>`;
   vids.innerHTML = postLink + profileLink;
   vids.addEventListener('click', e => {
     if (e.target.classList.contains('open-bg')) {
@@ -621,9 +621,10 @@ function handleInstagramLikerClick(rowEl, data, clean) {
   rowEl.classList.add('expanded');
   const vids = document.createElement('div');
   vids.className = 'videos';
-  const profileLink = `<div style="opacity:.9;margin-bottom:4px">Profile: <a href="#" class="open-bg">${escapeHTML(clean)}</a></div>`;
+  const profileUrl = profileUrlFor(currentPlatform, clean);
+  const profileLink = `<div style="opacity:.9;margin-bottom:4px">Profile: <a href="${profileUrl}" class="open-bg" target="_blank">${escapeHTML(clean)}</a></div>`;
   const videosHeader = `<div style="opacity:.9;margin-top:6px;margin-bottom:4px">Liked posts (${data.videos.length}):</div>`;
-  const links = data.videos.map(v => `<div><a href="#" class="open-bg">${escapeHTML(v)}</a></div>`).join('');
+  const links = data.videos.map(v => `<div><a href="${v}" class="open-bg" target="_blank">${escapeHTML(v)}</a></div>`).join('');
   vids.innerHTML = profileLink + videosHeader + links;
   vids.addEventListener('click', e => {
     if (e.target.classList.contains('open-bg')) {
@@ -650,7 +651,7 @@ function handleLikerRowClick(rowEl, vidsArr) {
   const vids = document.createElement('div');
   vids.className = 'videos';
   const header = `<div style="opacity:.9;margin-top:6px">Liked posts (${vidsArr.length}):</div>`;
-  const links = vidsArr.map(v => `<div><a href="#" class="open-bg">${escapeHTML(v)}</a></div>`).join('');
+  const links = vidsArr.map(v => `<div><a href="${v}" class="open-bg" target="_blank">${escapeHTML(v)}</a></div>`).join('');
   vids.innerHTML = header + links;
   vids.addEventListener('click', e => {
     if (e.target.classList.contains('open-bg')) {
@@ -670,8 +671,8 @@ function displayPeopleResults(matches, start, count, resultsEl) {
     const dn = stripFollowTokens(p.displayName || '');
     const nameHtml = dn ? `<strong>${escapeHTML(dn)}</strong> ` : '';
     const profileUrl = p.profileUrl || profileUrlFor(currentPlatform, uname);
-    div.innerHTML = `${nameHtml}<span style="opacity:.8">(@${escapeHTML(uname)})</span> — <a href="#" class="open-bg">${escapeHTML(profileUrl)}</a>`;
-    div.querySelector('.open-bg').addEventListener('click', () => window.open(profileUrl, '_blank'));
+    div.innerHTML = `${nameHtml}<span style="opacity:.8">(@${escapeHTML(uname)})</span> — <a href="${profileUrl}" class="open-bg" target="_blank">${escapeHTML(profileUrl)}</a>`;
+    div.querySelector('.open-bg').addEventListener('click', (e) => { e.preventDefault(); window.open(profileUrl, '_blank'); });
     resultsEl.appendChild(div);
   });
 }
