@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Capybara - Standalone Search Tool</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <img src="icon128.png" alt="Contact Capybara Logo" loading="lazy">
+      </div>
+      <div class="title">
+        <h1>Contact Capybara</h1>
+        <p>Standalone Search Tool for CSV Data</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="upload-section">
+      <h2>Import Contact Data</h2>
+      <p>Upload the CSV files downloaded from the Contact Capybara extension to search through your collected data.</p>
+      <p class="warning-note">⚠️ <strong>Important:</strong> Keep the original file & filename intact for optimal functionality.</p>
+      <div class="upload-area">
+        <input type="file" id="csvFile" accept=".csv" multiple />
+        <button id="loadCsv" class="btn primary">Load CSV Files</button>
+      </div>
+      <div id="loadStatus"></div>
+    </section>
+
+    <section id="searchSection" class="search-container" style="display:none;">
+      <div class="search-tabs">
+        <button class="search-tab active" data-tab="commenters">Search Commenters</button>
+        <button class="search-tab" data-tab="comments">Search Comments</button>
+        <button class="search-tab" data-tab="likers">Search Likers</button>
+        <button class="search-tab" data-tab="people">Search Followers & Following</button>
+        <button class="search-tab" data-tab="topcontacts">Top Contacts</button>
+      </div>
+
+      <div id="commentersTab" class="search-panel active">
+        <h3>Search Commenters by Username</h3>
+        <div class="search-controls">
+          <input type="text" id="searchCommenters" placeholder="Type username to search…" />
+          <div id="commenterInfo" class="results-info"></div>
+        </div>
+        <small>Click on username to reveal more.</small>
+        <div class="results-wrapper">
+          <div id="commenterResults" class="results"></div>
+          <button id="loadMoreCommenters" style="display:none;">Load More</button>
+        </div>
+      </div>
+
+      <div id="commentsTab" class="search-panel">
+        <h3>Search Within Comments</h3>
+        <div class="search-controls">
+          <input type="text" id="searchComments" placeholder="Search text in comments…" />
+          <div id="commentsInfo" class="results-info"></div>
+        </div>
+        <div class="search-options">
+          <label class="switch-label">
+            Exclude comments by profile owner
+            <input type="checkbox" id="excludeOwner" class="switch-input">
+            <span class="switch-slider"></span>
+          </label>
+        </div>
+        <small>Click on result to reveal more.</small>
+        <div class="results-wrapper">
+          <div id="commentsResults" class="results"></div>
+          <button id="loadMoreComments" style="display:none;">Load More</button>
+        </div>
+      </div>
+
+      <div id="likersTab" class="search-panel">
+        <h3>Search Likers by Username</h3>
+        <div class="search-controls">
+          <input type="text" id="searchLikers" placeholder="Search likers…" />
+          <div id="likerInfo" class="results-info"></div>
+        </div>
+        <small>Click on username to reveal more.</small>
+        <div class="results-wrapper">
+          <div id="likerResults" class="results"></div>
+          <button id="loadMoreLikers" style="display:none;">Load More</button>
+        </div>
+      </div>
+
+      <div id="peopleTab" class="search-panel">
+        <h3>Search Following & Followers</h3>
+        <div class="search-controls">
+          <input type="text" id="searchPeople" placeholder="Search by username or display name…" />
+          <div id="peopleInfo" class="results-info"></div>
+        </div>
+        <div id="followingWrapper" class="results-wrapper" style="display:none;">
+          <div class="results-header">
+            <h4>Following</h4>
+            <div id="followingInfo" class="results-info"></div>
+          </div>
+          <div id="followingResults" class="results"></div>
+          <button id="loadMoreFollowing" style="display:none;">Load More Following</button>
+        </div>
+        <div id="followersWrapper" class="results-wrapper" style="display:none;">
+          <div class="results-header">
+            <h4>Followers</h4>
+            <div id="followersInfo" class="results-info"></div>
+          </div>
+          <div id="followersResults" class="results"></div>
+          <button id="loadMoreFollowers" style="display:none;">Load More Followers</button>
+        </div>
+        <div id="combinedWrapper" class="results-wrapper" style="display:none;">
+          <div id="peopleResults" class="results"></div>
+          <button id="loadMorePeople" style="display:none;">Load More</button>
+        </div>
+      </div>
+
+      <div id="topcontactsTab" class="search-panel">
+        <h3>Top Contacts</h3>
+        <small>Click on username to reveal more.</small>
+        <div id="topCommentersWrapper" class="results-wrapper">
+          <div class="results" id="topCommentersResults"></div>
+          <button id="loadMoreTopCommenters" style="display:none;">Load More Commenters</button>
+        </div>
+        <div id="topLikersWrapper" class="results-wrapper">
+          <div class="results" id="topLikersResults"></div>
+          <button id="loadMoreTopLikers" style="display:none;">Load More Likers</button>
+        </div>
+        <div id="singleWrapper" class="results-wrapper">
+          <div id="topcontactsResults" class="results"></div>
+          <button id="loadMoreTopContacts" style="display:none;">Load More</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Contact Capybara - Standalone Search Tool</p>
+  </footer>
+
+  <button id="backToTopBtn" class="back-to-top-btn" aria-label="Back to top">
+    ↑
+  </button>
+
+  <script src="search.js"></script>
+</body>
